@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   createStyles,
   Theme,
@@ -13,19 +13,19 @@ import {
   List,
   ListItemText,
   Divider
-} from '@material-ui/core';
-import clsx from 'clsx';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import LanguageIcon from '@material-ui/icons/Language';
+} from "@material-ui/core";
+import clsx from "clsx";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardActions from "@material-ui/core/CardActions";
+import Collapse from "@material-ui/core/Collapse";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import { red } from "@material-ui/core/colors";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShareIcon from "@material-ui/icons/Share";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import LanguageIcon from "@material-ui/icons/Language";
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
@@ -33,17 +33,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   media: {
     height: 0,
-    paddingTop: '56.25%' // 16:9
+    paddingTop: "56.25%" // 16:9
   },
   expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     })
   },
   expandOpen: {
-    transform: 'rotate(180deg)'
+    transform: "rotate(180deg)"
   }
 }));
 
@@ -75,12 +75,14 @@ const JobCard: React.ComponentType<JobCardProps> = ({
   return (
     <Card className={classes.card} elevation={12}>
       <CardHeader
-        avatar={<Avatar style={{ backgroundColor: color }}>{companyName[0]}</Avatar>}
-        action={
-          <IconButton aria-label="Settings">
-            <MoreVertIcon />
-          </IconButton>
+        avatar={
+          <Avatar style={{ backgroundColor: color }}>{companyName[0]}</Avatar>
         }
+        // action={
+        //   <IconButton aria-label="Settings">
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
         title={`${role} at ${companyName}`}
         subheader={timespan}
       />
@@ -93,7 +95,7 @@ const JobCard: React.ComponentType<JobCardProps> = ({
         <IconButton target="_blank" href={url}>
           <LanguageIcon />
         </IconButton>
-        <IconButton
+        {/* <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
           })}
@@ -102,7 +104,7 @@ const JobCard: React.ComponentType<JobCardProps> = ({
           aria-label="Show more"
         >
           <ExpandMoreIcon />
-        </IconButton>
+        </IconButton> */}
       </CardActions>
       {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
