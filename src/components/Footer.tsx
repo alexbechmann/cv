@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, mergeClasses } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 import { Theme, AppBar, Toolbar, IconButton, Tooltip } from '@material-ui/core';
 import EmailIcon from '@material-ui/icons/Email';
 import CodeIcon from '@material-ui/icons/Code';
