@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "alias": ["alexbechmanncv"],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" }
+    }
+  ],
+  "github": {
+    "autoAlias": true
+  }
+}
