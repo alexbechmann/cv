@@ -1,9 +1,9 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import Icon from "@material-ui/core/Icon";
-import { withStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Layout from "./components/Layout";
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
+import { withStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Layout from './components/Layout';
 import {
   Container,
   Grid,
@@ -13,8 +13,9 @@ import {
   ListItemAvatar,
   ListItemIcon,
   Divider,
-  CssBaseline
-} from "@material-ui/core";
+  CssBaseline,
+  Avatar
+} from '@material-ui/core';
 import {
   DiReact,
   DiGit,
@@ -24,10 +25,10 @@ import {
   DiVisualstudio,
   DiDocker,
   DiJsBadge
-} from "react-icons/di";
-import TypescriptIcon from "./components/icons/Typescript";
-import GraphQL from "./components/icons/GraphQL";
-import Experience from "./components/Experience";
+} from 'react-icons/di';
+import TypescriptIcon from './components/icons/Typescript';
+import GraphQL from './components/icons/GraphQL';
+import Experience from './components/Experience';
 
 const useStyles = makeStyles((theme: Theme) => ({
   divider: {
@@ -48,20 +49,15 @@ const App = () => {
               About
             </Typography>
             <Typography paragraph>
-              My name is Alex Bechmann, i am a skilled full-stack web developer
-              from Silkleborg Denmark. I grew up in Ipswich, United Kingdom and
-              moved to Denmark in 2009 to go to højskole and study.
+              My name is Alex Bechmann, i am a skilled full-stack web developer from Silkleborg Denmark. I grew up in
+              Ipswich, United Kingdom and moved to Denmark in 2009 to go to højskole and study.
             </Typography>
             <Typography paragraph>
-              I have a passion for writing clean, well architectured code
-              throughout the full stack.
+              I have a passion for writing clean, well architectured code throughout the full stack.
             </Typography>
+            <Typography paragraph>I speak fluent English & Danish, written as well as spoken.</Typography>
             <Typography paragraph>
-              I speak fluent English & Danish, written as well as spoken.
-            </Typography>
-            <Typography paragraph>
-              Outside work i love to swim, play music, code my side projects &
-              look after my daughter! :)
+              Outside work i love to swim, play music, code my side projects & look after my daughter! :)
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
