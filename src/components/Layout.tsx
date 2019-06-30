@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { withStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import Helmet from "react-helmet";
 import Footer from "./Footer";
 import Header from "./Header";
 
@@ -21,15 +20,6 @@ const Layout = ({ children }) => {
   const classes = useStyles({});
   return (
     <Fragment>
-      <Helmet
-        title="Alex Bechmann CV"
-        meta={[
-          { name: "description", content: "Sample" },
-          { name: "keywords", content: "sample, something" }
-        ]}
-      >
-        <html lang="en" />
-      </Helmet>
       <Header />
       <div className={classes.root}>{children}</div>
       <Footer />
