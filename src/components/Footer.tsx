@@ -12,14 +12,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   '@global body': {
     paddingBottom: 86
+  },
+  grow: {
+    flexGrow: 1
   }
 }));
 
 const Footer = () => {
   const classes = useStyles({});
   return (
-    <AppBar color="inherit" className={classes.appBar} position="fixed">
+    <AppBar color="inherit" className={classes.appBar} position="fixed" elevation={0}>
       <Toolbar>
+        <div className={classes.grow} />
         <Tooltip title="Send me an email">
           <IconButton href="mailto:alex.bechmann@outlook.com">
             <EmailIcon />
