@@ -2,7 +2,17 @@ import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Layout from './components/Layout';
-import { Container, Grid, List, ListItem, ListItemText, ListItemIcon, Divider, CssBaseline } from '@material-ui/core';
+import {
+  Container,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  Divider,
+  CssBaseline,
+  Link
+} from '@material-ui/core';
 import { DiReact, DiGit, DiNodejsSmall, DiMongodb, DiMsqlServer, DiVisualstudio, DiDocker } from 'react-icons/di';
 import TypescriptIcon from './components/icons/Typescript';
 import GraphQL from './components/icons/GraphQL';
@@ -10,8 +20,8 @@ import Experience from './components/Experience';
 
 const useStyles = makeStyles((theme: Theme) => ({
   divider: {
-    marginTop: theme.spacing(),
-    marginBottom: theme.spacing()
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3)
   }
 }));
 
@@ -118,6 +128,14 @@ const App = () => {
           Experience
         </Typography>
         <Experience />
+        <Divider className={classes.divider} />
+        <Typography paragraph>
+          Please{' '}
+          <Link color="secondary" href="mailto:alex.bechmann@outlook.com">
+            contact me
+          </Link>{' '}
+          for references & exam documents.
+        </Typography>
       </Container>
     </Layout>
   );

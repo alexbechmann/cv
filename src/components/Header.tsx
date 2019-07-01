@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import GitHub from './icons/GitHub';
-import { Theme, IconButton, Avatar } from '@material-ui/core';
+import { Theme, IconButton, Avatar, Tooltip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -35,9 +35,11 @@ const Header = () => {
               Alex Bechmann CV
             </Typography>
             <div className={classes.grow} />
-            <IconButton color="inherit" href="https://github.com/alexbechmann">
-              <GitHub />
-            </IconButton>
+            <Tooltip title="Browse some of my work on GitHub">
+              <IconButton color="inherit" href="https://github.com/alexbechmann">
+                <GitHub />
+              </IconButton>
+            </Tooltip>
           </Toolbar>
         </Container>
       </AppBar>
