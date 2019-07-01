@@ -14,7 +14,7 @@ const jobs: JobCardProps[] = [
     companyName: 'Danfoss',
     role: 'Web & CMS Consultant',
     description:
-      'I work as a DevOps & full-stack developer, across a number of CMS websites. I built the company Intranet from the ground up with a small team, and i am actively involed in automation & cloud infrastructure for www.danfoss.com.',
+      'My current role is a full-stack developer & DevOps enginner, working on a number internal content management websites. Working in a small team, we have built the company intranet site from the ground up, and i am actively involed in automation & cloud infrastructure for www.danfoss.com.',
     timespan: 'Jan 2016 - Present',
     color: '#e2000f',
     url: 'https://www.danfoss.com/',
@@ -32,29 +32,32 @@ const jobs: JobCardProps[] = [
       'MongoDB',
       'NodeJS',
       'GraphQL'
-    ]
+    ],
+    location: 'Nordborg, Denmark'
   },
   {
     companyName: 'Farlon',
     role: '.NET Developer',
     description:
-      'My first job after graduating. I was responsible for the development of a web app to import, manipulate & export customer data.',
+      'My first job after graduating. I developed a web-app to facilitate importing, manipulation & exporting of customer data for their suite of Active Directory based call center solutions.',
     timespan: 'Aug 2015 - Dec 2015',
     color: '#005896',
     url: 'https://www.farlon.com/',
     tasks: [],
-    tags: ['.NET Framework', 'DevExpress', 'Solo project']
+    tags: ['.NET Framework', 'DevExpress', 'Solo project'],
+    location: 'Copenhagen, Denmark'
   },
   {
     companyName: 'Ustwo',
     role: 'iOS Developer intern',
     description:
-      'I took part in an internship program, learning how to properly plan and validate assumptions before using those skills to build iOS apps for the main internship project and client work.',
+      'I took part in an internship program with ustwo, a design & development agency in London. We learned how to thoroughly plan and validate project assumptions prior to using those skills to build native iOS apps for the main internship project and client work.',
     timespan: 'Feb 2015 - Apr 2015',
     color: '#ffbf02',
     url: 'https://www.ustwo.com/',
     tasks: [],
-    tags: ['Swift', 'PHP', 'Scrum', 'Git']
+    tags: ['Swift', 'PHP', 'Scrum', 'Git'],
+    location: 'London, United Kingdom'
   },
   {
     companyName: 'Business Academy Aarhus',
@@ -65,14 +68,15 @@ const jobs: JobCardProps[] = [
     color: '#57B7C9',
     url: 'https://www.baaa.dk/',
     tasks: [],
-    tags: ['.NET Framework', 'PHP', 'C#', 'Objective C', 'Photoshop', 'SQL', 'NoSQL', 'HTML', 'CSS', 'JavaScript']
+    tags: ['.NET Framework', 'PHP', 'C#', 'Objective C', 'Photoshop', 'SQL', 'NoSQL', 'HTML', 'CSS', 'JavaScript'],
+    location: 'Aarhus, Denmark'
   }
 ];
 
 const Experience = () => {
   const classes = useStyles({});
   return (
-    <Container maxWidth="xs">
+    <Container maxWidth="sm">
       <Grid container className={classes.root}>
         {jobs
           .map((job, index) => (

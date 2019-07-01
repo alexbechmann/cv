@@ -37,27 +37,28 @@ const App = () => {
               About
             </Typography>
             <Typography paragraph>
-              My name is Alex Bechmann, i am a 27 year old, skilled full-stack web developer from Silkeborg Denmark. I
-              grew up in Suffolk, United Kingdom and moved to Denmark in 2009 to go to højskole and begin my studies.
+              My name is Alex Bechmann, a 27 year old full-stack web developer from Silkeborg. I grew up in Suffolk,
+              United Kingdom and moved to Denmark in 2010 to study for a Bachelor degree in Web Development.
             </Typography>
             <Typography paragraph>
-              I have a passion for writing clean, understandable, well architectured code on both the front and backend.
-              I always keep up to date with the industry trends, and continuously look for ways to improve my skills as
-              a web developer.
+              I have a passion for writing clean, easily understood and well architectured code on both front and
+              back-end environments. I work hard to keep up to date with industry trends, and continuously look for ways
+              to improve my skills as a developer.
             </Typography>
             <Typography paragraph>
-              I am comfortable collaborating with other people in a SCRUM team, as well as by myself on solo projects.
+              I am equally comfortable collaborating with others in a team, as I am working solo on projects.
             </Typography>
-            <Typography paragraph>I speak fluent English & Danish, written as well as spoken.</Typography>
+            <Typography paragraph>My native language is English, and I also speak Danish fluently.</Typography>
             <Typography paragraph>
-              Outside work i love to swim, play music, code my side projects & look after my daughter!
+              Outside of work I love to swim, play music, learn new coding skills by working on side projects & spending
+              time with my family!
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Typography variant="h5" gutterBottom>
-              Technical skills
+              Technical skills include
             </Typography>
-            <List>
+            <List dense>
               <ListItem>
                 <ListItemIcon>
                   <TypescriptIcon
@@ -125,7 +126,7 @@ const App = () => {
         </Grid>
         <Divider className={classes.divider} />
         <Typography gutterBottom variant="h5">
-          Experience
+          Professional experience
         </Typography>
         <Experience />
         <Divider className={classes.divider} />

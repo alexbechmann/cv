@@ -37,15 +37,25 @@ export interface JobCardProps {
   url: string;
   tasks: { primaryText: string; secondaryText: string }[];
   tags: string[];
+  location: string;
 }
 
-const JobCard: React.ComponentType<JobCardProps> = ({ companyName, role, description, timespan, color, url, tags }) => {
+const JobCard: React.ComponentType<JobCardProps> = ({
+  location,
+  companyName,
+  role,
+  description,
+  timespan,
+  color,
+  url,
+  tags
+}) => {
   const classes = useStyles({});
   return (
     <Card className={classes.card} elevation={12}>
       <CardHeader
         avatar={<Avatar style={{ backgroundColor: color }}>{companyName[0]}</Avatar>}
-        title={`${role} at ${companyName}`}
+        title={`${role} at ${companyName} (${location})`}
         subheader={timespan}
       />
       <CardContent>
