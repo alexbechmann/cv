@@ -14,14 +14,14 @@ const jobs: JobCardProps[] = [
     companyName: 'Danfoss',
     role: 'Web & CMS Consultant',
     description:
-      'I work as a DevOps & full-stack developer, accross a suite of in-house CMS websites. I built the company Intranet from the ground up with a small team, and i am actively involed in automation & cloud infrastructure for www.danfoss.com.',
+      'I work as a DevOps & full-stack developer, accross a suite of CMS websites. I built the company Intranet from the ground up with a small team, and i am actively involed in automation & cloud infrastructure for www.danfoss.com.',
     timespan: 'Jan 2016 - Present',
     color: '#e2000f',
     url: 'https://www.danfoss.com/',
     tasks: [],
     tags: [
       'React',
-      'Typescript',
+      'TypeScript',
       'Azure DevOps',
       'Umbraco',
       '.NET Framework',
@@ -30,7 +30,10 @@ const jobs: JobCardProps[] = [
       'Azure',
       'Code review',
       'Scrum',
-      'MongoDB'
+      'MongoDB',
+      'Gitflow',
+      'NodeJS',
+      'GraphQL'
     ]
   },
   {
@@ -45,14 +48,14 @@ const jobs: JobCardProps[] = [
   },
   {
     companyName: 'Ustwo',
-    role: 'iOS Developer Intern',
+    role: 'iOS Developer intern',
     description:
-      'I took part in an intern program with two others, learning how to properly plan and validate your assumptions, as well as working with Swift to build iOS apps for the intern main project as well as client work.',
+      'I took part in an internship program, learning how to properly plan and validate assumptions before building iOS apps for the main internship project and for client work.',
     timespan: 'Feb 2015 - Apr 2015',
     color: '#ffbf02',
     url: 'https://www.ustwo.com/',
     tasks: [],
-    tags: ['Swift', 'PHP', 'Scrum']
+    tags: ['Swift', 'PHP', 'Scrum', 'Git']
   },
   {
     companyName: 'Business Academy Aarhus',
