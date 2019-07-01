@@ -31,12 +31,12 @@ const App = () => {
               grew up in Suffolk, United Kingdom and moved to Denmark in 2009 to go to højskole and begin my studies.
             </Typography>
             <Typography paragraph>
-              I have a passion for writing clean, well architectured code & infrastructure on both the front and
-              backend. I always keep up to date with the industry trends, and continuously look for ways to improve my
-              skills as a web developer.
+              I have a passion for writing clean, understandable, well architectured code on both the front and backend.
+              I always keep up to date with the industry trends, and continuously look for ways to improve my skills as
+              a web developer.
             </Typography>
             <Typography paragraph>
-              I am comfortable collaborating with other people in a SCRUM team, as well as by myself on a solo project.
+              I am comfortable collaborating with other people in a SCRUM team, as well as by myself on solo projects.
             </Typography>
             <Typography paragraph>I speak fluent English & Danish, written as well as spoken.</Typography>
             <Typography paragraph>
