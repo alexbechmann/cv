@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import GitHub from './icons/GitHub';
-import { createStyles, Theme, Button, IconButton, Avatar } from '@material-ui/core';
+import { Theme, IconButton, Avatar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme: Theme) => ({

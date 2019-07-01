@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import { withStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Footer from './Footer';
 import Header from './Header';
 

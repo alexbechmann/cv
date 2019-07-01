@@ -1,31 +1,9 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import { withStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import { Theme, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Layout from './components/Layout';
-import {
-  Container,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  ListItemIcon,
-  Divider,
-  CssBaseline,
-  Avatar
-} from '@material-ui/core';
-import {
-  DiReact,
-  DiGit,
-  DiNodejsSmall,
-  DiMongodb,
-  DiMsqlServer,
-  DiVisualstudio,
-  DiDocker,
-  DiJsBadge
-} from 'react-icons/di';
+import { Container, Grid, List, ListItem, ListItemText, ListItemIcon, Divider, CssBaseline } from '@material-ui/core';
+import { DiReact, DiGit, DiNodejsSmall, DiMongodb, DiMsqlServer, DiVisualstudio, DiDocker } from 'react-icons/di';
 import TypescriptIcon from './components/icons/Typescript';
 import GraphQL from './components/icons/GraphQL';
 import Experience from './components/Experience';
@@ -49,15 +27,16 @@ const App = () => {
               About
             </Typography>
             <Typography paragraph>
-              My name is Alex Bechmann, i am a 27 year old, skilled full-stack web developer from Silkeborg Denmark. I grew up in
-              Suffolk, United Kingdom and moved to Denmark in 2009 to go to højskole and begin my studies.
+              My name is Alex Bechmann, i am a 27 year old, skilled full-stack web developer from Silkeborg Denmark. I
+              grew up in Suffolk, United Kingdom and moved to Denmark in 2009 to go to højskole and begin my studies.
             </Typography>
             <Typography paragraph>
-              I have a passion for writing clean, well architectured code & infrastructure on both the front and backend. 
-              I always keep up to date with the industry trends, and continuously look for ways to improve my skills as a web developer.
+              I have a passion for writing clean, well architectured code & infrastructure on both the front and
+              backend. I always keep up to date with the industry trends, and continuously look for ways to improve my
+              skills as a web developer.
             </Typography>
-             <Typography paragraph>
-             I am comfortable collaborating with other people in a SCRUM team, as well as by myself on a solo project.
+            <Typography paragraph>
+              I am comfortable collaborating with other people in a SCRUM team, as well as by myself on a solo project.
             </Typography>
             <Typography paragraph>I speak fluent English & Danish, written as well as spoken.</Typography>
             <Typography paragraph>
@@ -66,12 +45,16 @@ const App = () => {
           </Grid>
           <Grid item xs={12} sm={4}>
             <Typography variant="h5" gutterBottom>
-              Skills & interests
+              Technical skills
             </Typography>
             <List>
               <ListItem>
                 <ListItemIcon>
-                  <TypescriptIcon style={{ marginLeft: 4 }} />
+                  <TypescriptIcon
+                    style={{
+                      marginLeft: 4
+                    }}
+                  />
                 </ListItemIcon>
                 <ListItemText primary="TypeScript" />
               </ListItem>
@@ -119,7 +102,11 @@ const App = () => {
               </ListItem>
               <ListItem>
                 <ListItemIcon>
-                  <GraphQL style={{ marginLeft: 4 }} />
+                  <GraphQL
+                    style={{
+                      marginLeft: 4
+                    }}
+                  />
                 </ListItemIcon>
                 <ListItemText primary="GraphQL" />
               </ListItem>
