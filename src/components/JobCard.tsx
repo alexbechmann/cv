@@ -6,9 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import LanguageIcon from '@material-ui/icons/Language';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  card: {
-    maxWidth: 345
-  },
+  card: {},
   media: {
     height: 0,
     paddingTop: '56.25%' // 16:9

@@ -73,7 +73,7 @@ const Experience = () => {
   const classes = useStyles({});
   return (
     <Container maxWidth="xs">
-      <Grid container spacing={2} className={classes.root}>
+      <Grid container className={classes.root}>
         {jobs
           .map((job, index) => (
             <Slide key={job.companyName} in={true} direction={index % 2 ? 'left' : 'right'}>
