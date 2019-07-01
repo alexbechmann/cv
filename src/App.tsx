@@ -49,15 +49,19 @@ const App = () => {
               About
             </Typography>
             <Typography paragraph>
-              My name is Alex Bechmann, i am a skilled full-stack web developer from Silkleborg Denmark. I grew up in
-              Ipswich, United Kingdom and moved to Denmark in 2009 to go to højskole and study.
+              My name is Alex Bechmann, i am a 27 year old, skilled full-stack web developer from Silkeborg Denmark. I grew up in
+              Suffolk, United Kingdom and moved to Denmark in 2009 to go to højskole and begin my studies.
             </Typography>
             <Typography paragraph>
-              I have a passion for writing clean, well architectured code throughout the full stack.
+              I have a passion for writing clean, well architectured code & infrastructure on both the front and backend. 
+              I always keep up to date with the industry trends, and continuously look for ways to improve my skills as a web developer.
+            </Typography>
+             <Typography paragraph>
+             I am comfortable collaborating with other people in a SCRUM team, as well as by myself on a solo project.
             </Typography>
             <Typography paragraph>I speak fluent English & Danish, written as well as spoken.</Typography>
             <Typography paragraph>
-              Outside work i love to swim, play music, code my side projects & look after my daughter! :)
+              Outside work i love to swim, play music, code my side projects & look after my daughter!
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
