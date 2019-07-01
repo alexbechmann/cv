@@ -35,7 +35,7 @@ const Header = () => {
               Alex Bechmann CV
             </Typography>
             <div className={classes.grow} />
-            <Tooltip title="Browse some of my work on GitHub">
+            <Tooltip title="Browse some of my projects on GitHub">
               <IconButton color="inherit" href="https://github.com/alexbechmann">
                 <GitHub />
               </IconButton>
