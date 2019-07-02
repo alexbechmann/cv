@@ -14,7 +14,7 @@ const jobs: JobCardProps[] = [
     companyName: 'Danfoss',
     role: 'Web & CMS Consultant',
     description:
-      'My current role is a full-stack developer & DevOps enginner, working on a number internal content management websites. Working in a small team, we have built the company intranet site from the ground up, and i am actively involed in automation & cloud infrastructure for www.danfoss.com.',
+      'My current role is a full-stack DevOps developer, working on a number internal content management websites. With in a small team, we have built the company intranet site from the ground up, and i am actively involed in automation & cloud infrastructure for www.danfoss.com.',
     timespan: 'Jan 2016 - Present',
     color: '#e2000f',
     url: 'https://www.danfoss.com/',
@@ -63,7 +63,7 @@ const jobs: JobCardProps[] = [
     companyName: 'Business Academy Aarhus',
     role: 'Student',
     description:
-      'I studied Multimedia Design & Communication for two years, and continued on to complete my Bachelors degree with another year and a half of Web Development at BAA. I also won a graduation award for the highest exam grades!',
+      'I studied first Multimedia Design & Communication, before completing my Bachelors degree in Web Development at BAA. I also won a graduation award for the highest exam grades!',
     timespan: 'Jan 2012 - June 2015',
     color: '#57B7C9',
     url: 'https://www.baaa.dk/',
