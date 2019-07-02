@@ -50,7 +50,7 @@ const App = () => {
             </Typography>
             <Typography paragraph>My native language is English, and I also speak Danish fluently.</Typography>
             <Typography paragraph>
-              Outside of work I love to swim, play music, learn new coding skills by working on side projects & spending
+              Outside of work I love to swim, play music, learn new coding skills by working on side projects & spend
               time with my family!
             </Typography>
           </Grid>
