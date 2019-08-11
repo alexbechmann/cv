@@ -83,21 +83,19 @@ const App = () => {
               </ListItem>
               <ListItem>
                 <ListItemIcon>
+                  <GraphQL
+                    style={{
+                      marginLeft: 4
+                    }}
+                  />
+                </ListItemIcon>
+                <ListItemText primary="GraphQL" />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
                   <DiGit size={32} />
                 </ListItemIcon>
                 <ListItemText primary="Git workflows" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <DiVisualstudio size={32} />
-                </ListItemIcon>
-                <ListItemText primary=".NET Core" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <DiMsqlServer size={32} />
-                </ListItemIcon>
-                <ListItemText primary="SQL" />
               </ListItem>
               <ListItem>
                 <ListItemIcon>
@@ -107,19 +105,21 @@ const App = () => {
               </ListItem>
               <ListItem>
                 <ListItemIcon>
+                  <DiMsqlServer size={32} />
+                </ListItemIcon>
+                <ListItemText primary="SQL" />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
                   <DiDocker size={32} />
                 </ListItemIcon>
                 <ListItemText primary="Docker" />
               </ListItem>
               <ListItem>
                 <ListItemIcon>
-                  <GraphQL
-                    style={{
-                      marginLeft: 4
-                    }}
-                  />
+                  <DiVisualstudio size={32} />
                 </ListItemIcon>
-                <ListItemText primary="GraphQL" />
+                <ListItemText primary=".NET Core" />
               </ListItem>
             </List>
           </Grid>
