@@ -2,16 +2,19 @@ import * as k8s from '@pulumi/kubernetes';
 import * as kx from '@pulumi/kubernetesx';
 import * as pulumi from '@pulumi/pulumi';
 import * as docker from '@pulumi/docker';
+import * as digitalocean from '@pulumi/digitalocean';
 
-var sharedStack = new pulumi.StackReference('alexbechmann/pulumi-home-k8s-shared/master');
+const sharedStack = new pulumi.StackReference('alexbechmann/pulumi-home-k8s-shared/master');
 const kubeconfig = sharedStack.getOutput('kubeconfig');
-var provider = new k8s.Provider('shared-cluster', {
+// const nginxIngressIp = sharedStack.getOutput('nginxIngressIp');
+const provider = new k8s.Provider('shared-cluster', {
   kubeconfig
 });
 const env = pulumi.getStack().split('-')[0];
-const project = pulumi.getProject();
+const project = 'cv';
+const publicIp = '212.237.134.217';
 
-const dockerImage = new docker.Image('ryomtand-app-image', {
+const dockerImage = new docker.Image('image', {
   build: '../',
   imageName: `alexbechmann/${project}:${env}`
 });
@@ -19,9 +22,24 @@ const dockerImage = new docker.Image('ryomtand-app-image', {
 const appName = `${project}-${env}`;
 const appLabels = { app: appName };
 
+const namespace = appName;
+
+const appNamespace = new k8s.core.v1.Namespace(
+  'namespace',
+  {
+    metadata: {
+      name: namespace
+    }
+  },
+  { provider }
+);
+
 const deployment = new k8s.apps.v1.Deployment(
   appName,
   {
+    metadata: {
+      namespace
+    },
     spec: {
       selector: { matchLabels: appLabels },
       strategy: {
@@ -68,7 +86,8 @@ const appService = new k8s.core.v1.Service(
   appName,
   {
     metadata: {
-      name: appName
+      name: appName,
+      namespace
     },
     spec: {
       ports: [
@@ -97,11 +116,19 @@ if (env === 'master') {
 hostPrefixes.forEach(hostPrefix => {
   const secretName = `tls-${hostPrefix}`;
   const host = `${hostPrefix}.alexbechmann.dev`;
+  var dns = new digitalocean.DnsRecord(host, {
+    ttl: 300,
+    name: hostPrefix,
+    domain: 'alexbechmann.dev',
+    type: 'A',
+    value: publicIp
+  });
   const ingress = new k8s.networking.v1beta1.Ingress(
-    hostPrefix,
+    host,
     {
       metadata: {
         name: hostPrefix,
+        namespace,
         annotations: {
           'kubernetes.io/ingress.class': 'nginx',
           'certmanager.k8s.io/cluster-issuer': 'letsencrypt-prod',
@@ -136,27 +163,43 @@ hostPrefixes.forEach(hostPrefix => {
     { provider }
   );
 
-  var sslCert = k8s.yaml.parse(
+  const sslCert = k8s.yaml.parse(
     {
       yaml: `
-apiVersion: certmanager.k8s.io/v1alpha1
+apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: ${secretName} 
+  name: ${secretName}
 spec:
-  secretName: ${secretName} 
+  secretName: ${secretName}
   dnsNames:
-  - ${host} 
-  acme:
-    config:
-    - http01:
-        ingressClass: nginx
-      domains:
-      - ${host} 
+  - ${host}
   issuerRef:
     name: letsencrypt-staging
-    kind: ClusterIssuer
-  `
+    # We can reference ClusterIssuers by changing the kind here.
+    # The default value is Issuer (i.e. a locally namespaced Issuer)
+    kind: Issuer
+    group: cert-manager.io
+      `
+      //       yaml: `
+      // apiVersion: cert-manager.io/v1alpha2
+      // kind: Certificate
+      // metadata:
+      //   name: ${secretName}
+      // spec:
+      //   secretName: ${secretName}
+      //   dnsNames:
+      //   - ${host}
+      //   acme:
+      //     config:
+      //     - http01:
+      //         ingressClass: nginx
+      //       domains:
+      //       - ${host}
+      //   issuerRef:
+      //     name: letsencrypt-staging
+      //     kind: ClusterIssuer
+      //   `
     },
     { provider }
   );
