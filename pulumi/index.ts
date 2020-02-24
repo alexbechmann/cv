@@ -12,7 +12,7 @@ const provider = new k8s.Provider('shared-cluster', {
 });
 const env = pulumi.getStack().split('-')[0];
 const project = 'cv';
-const publicIp = '212.237.134.217';
+const publicIp = '100.64.81.158';
 
 const dockerImage = new docker.Image('image', {
   build: '../',
