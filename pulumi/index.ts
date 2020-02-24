@@ -114,7 +114,8 @@ if (env === 'master') {
 }
 
 hostPrefixes.forEach(hostPrefix => {
-  const secretName = `tls-${hostPrefix}`;
+  const issuer: 'staging' | 'prod' = 'prod';
+  const secretName = `tls-${hostPrefix}-secret-${issuer}`;
   const host = `${hostPrefix}.alexbechmann.dev`;
   var dns = new digitalocean.DnsRecord(host, {
     ttl: 300,
@@ -131,8 +132,10 @@ hostPrefixes.forEach(hostPrefix => {
         namespace,
         annotations: {
           'kubernetes.io/ingress.class': 'nginx',
-          'cert-manager.io/issuer': 'letsencrypt-prod',
-          'ingress.kubernetes.io/force-ssl-redirect': 'true'
+          'cert-manager.io/cluster-issuer': `letsencrypt-${issuer}`
+          // 'ingress.kubernetes.io/force-ssl-redirect': 'true',,
+          // 'kubernetes.io/tls-acme': 'true'
+          // 'acme.cert-manager.io/http01-ingress-class': 'nginx'
         }
       },
       spec: {
@@ -163,28 +166,28 @@ hostPrefixes.forEach(hostPrefix => {
     { provider }
   );
 
-  const sslCert = k8s.yaml.parse(
-    {
-      yaml: `
-      apiVersion: cert-manager.io/v1alpha2
-      kind: Certificate
-      metadata:
-        name: ${secretName}
-      spec:
-        secretName: ${secretName}
-        dnsNames:
-        - ${host}
-        acme:
-          config:
-          - http01:
-              ingressClass: nginx
-            domains:
-            - ${host}
-        issuerRef:
-          name: letsencrypt-prod
-          kind: Issuer
-        `
-    },
-    { provider }
-  );
+  // const sslCert = k8s.yaml.parse(
+  //   {
+  //     yaml: `
+  //     apiVersion: cert-manager.io/v1alpha2
+  //     kind: Certificate
+  //     metadata:
+  //       name: ${secretName}
+  //     spec:
+  //       secretName: ${secretName}
+  //       dnsNames:
+  //       - ${host}
+  //       acme:
+  //         config:
+  //         - http01:
+  //             ingressClass: nginx
+  //           domains:
+  //           - ${host}
+  //       issuerRef:
+  //         name: letsencrypt-prod
+  //         kind: Issuer
+  //       `
+  //   },
+  //   { provider }
+  // );
 });
