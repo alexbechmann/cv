@@ -131,7 +131,7 @@ hostPrefixes.forEach(hostPrefix => {
         namespace,
         annotations: {
           'kubernetes.io/ingress.class': 'nginx',
-          'certmanager.k8s.io/cluster-issuer': 'letsencrypt-prod',
+          'cert-manager.io/issuer': 'letsencrypt-prod',
           'ingress.kubernetes.io/force-ssl-redirect': 'true'
         }
       },
@@ -166,40 +166,24 @@ hostPrefixes.forEach(hostPrefix => {
   const sslCert = k8s.yaml.parse(
     {
       yaml: `
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: ${secretName}
-spec:
-  secretName: ${secretName}
-  dnsNames:
-  - ${host}
-  issuerRef:
-    name: letsencrypt-staging
-    # We can reference ClusterIssuers by changing the kind here.
-    # The default value is Issuer (i.e. a locally namespaced Issuer)
-    kind: Issuer
-    group: cert-manager.io
-      `
-      //       yaml: `
-      // apiVersion: cert-manager.io/v1alpha2
-      // kind: Certificate
-      // metadata:
-      //   name: ${secretName}
-      // spec:
-      //   secretName: ${secretName}
-      //   dnsNames:
-      //   - ${host}
-      //   acme:
-      //     config:
-      //     - http01:
-      //         ingressClass: nginx
-      //       domains:
-      //       - ${host}
-      //   issuerRef:
-      //     name: letsencrypt-staging
-      //     kind: ClusterIssuer
-      //   `
+      apiVersion: cert-manager.io/v1alpha2
+      kind: Certificate
+      metadata:
+        name: ${secretName}
+      spec:
+        secretName: ${secretName}
+        dnsNames:
+        - ${host}
+        acme:
+          config:
+          - http01:
+              ingressClass: nginx
+            domains:
+            - ${host}
+        issuerRef:
+          name: letsencrypt-prod
+          kind: Issuer
+        `
     },
     { provider }
   );
