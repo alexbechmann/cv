@@ -1,5 +1,5 @@
 # Alex Bechmann CV
 
-https://cv.alexbechmann.now.sh/
+https://cv.alexbechmann.dev/
 
 Built with Create-React-App
