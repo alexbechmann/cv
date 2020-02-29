@@ -45,7 +45,7 @@ const deployment = new k8s.apps.v1.Deployment(
       strategy: {
         rollingUpdate: { maxSurge: 5, maxUnavailable: 3 }
       },
-      replicas: 1,
+      replicas: 2,
       template: {
         metadata: { labels: appLabels },
         spec: {
