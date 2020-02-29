@@ -1,7 +1,7 @@
-import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Layout from './components/Layout';
+import React from "react";
+import { Theme, makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Layout from "../src/components/Layout";
 import {
   Container,
   Grid,
@@ -12,11 +12,19 @@ import {
   Divider,
   CssBaseline,
   Link
-} from '@material-ui/core';
-import { DiReact, DiGit, DiNodejsSmall, DiMongodb, DiMsqlServer, DiVisualstudio, DiDocker } from 'react-icons/di';
-import TypescriptIcon from './components/icons/Typescript';
-import GraphQL from './components/icons/GraphQL';
-import Experience from './components/Experience';
+} from "@material-ui/core";
+import {
+  DiReact,
+  DiGit,
+  DiNodejsSmall,
+  DiMongodb,
+  DiMsqlServer,
+  DiVisualstudio,
+  DiDocker
+} from "react-icons/di";
+import TypescriptIcon from "../src/components/icons/Typescript";
+import GraphQL from "../src/components/icons/GraphQL";
+import Experience from "../src/components/Experience";
 
 const useStyles = makeStyles((theme: Theme) => ({
   divider: {
@@ -25,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const App = () => {
+const Index = () => {
   const classes = useStyles({});
   return (
     <Layout>
@@ -37,21 +45,26 @@ const App = () => {
               About
             </Typography>
             <Typography paragraph>
-              My name is Alex Bechmann, a 27 year old full-stack web developer from Silkeborg. I grew up in Suffolk,
-              United Kingdom and moved to Denmark in 2010 to study for a Bachelor degree in Web Development.
+              My name is Alex Bechmann, a 27 year old full-stack web developer
+              from Silkeborg. I grew up in Suffolk, United Kingdom and moved to
+              Denmark in 2010 to study for a Bachelor degree in Web Development.
             </Typography>
             <Typography paragraph>
-              I have a passion for writing clean, easily understood and well architectured code on both front and
-              back-end environments. I work hard to keep up to date with industry trends, and continuously look for ways
-              to improve my skills as a developer.
+              I have a passion for writing clean, easily understood and well
+              architectured code on both front and back-end environments. I work
+              hard to keep up to date with industry trends, and continuously
+              look for ways to improve my skills as a developer.
             </Typography>
             <Typography paragraph>
-              I am equally comfortable collaborating with others in a team, as I am working solo on projects.
+              I am equally comfortable collaborating with others in a team, as I
+              am working solo on projects.
             </Typography>
-            <Typography paragraph>My native language is English, and I also speak Danish fluently.</Typography>
             <Typography paragraph>
-              Outside of work I love to swim, play music, learn new coding skills by working on side projects & spend
-              time with my family!
+              My native language is English, and I also speak Danish fluently.
+            </Typography>
+            <Typography paragraph>
+              Outside of work I love to swim, play music, learn new coding
+              skills by working on side projects & spend time with my family!
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -131,10 +144,10 @@ const App = () => {
         <Experience />
         <Divider className={classes.divider} />
         <Typography paragraph>
-          Please{' '}
+          Please{" "}
           <Link color="secondary" href="mailto:alex.bechmann@outlook.com">
             contact me
-          </Link>{' '}
+          </Link>{" "}
           for references & exam documents.
         </Typography>
       </Container>
@@ -142,4 +155,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Index;
