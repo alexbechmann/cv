@@ -16,8 +16,10 @@ steps:
 - script: docker login --username alexbechmann --password $(DOCKER_TOKEN)
   displayName: Docker login
 
-
-- script: echo "$(Build.SourceBranchName)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-
+- script: |
+    $SLUG = echo "$(Build.SourceBranchName)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-
+    echo "slug is $SLUG"
+    
 
 
 # - script: pulumi stack init staging
