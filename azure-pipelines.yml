@@ -8,7 +8,6 @@ pool:
     - HOME_NETWORK
     #  - agent.os -equals Darwin  # check for specific string in capability
 
-
 variables: 
   - group: Secrets
   - name: env
@@ -22,6 +21,7 @@ steps:
     SLUG=$(echo "$(system.pullRequest.sourceBranch)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-)
     echo "env is $SLUG"
     echo "##vso[task.setvariable variable=env]$SLUG"
+  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
 - script: pulumi stack init $(env)
   workingDirectory: pulumi
