@@ -32,7 +32,6 @@ steps:
 - script: pulumi preview --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi
   displayName: 'Preview Pulumi'
 
-# - script: |
-#     /home/vsts/.pulumi/bin/pulumi up --stack $(Build.SourceBranchName) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi/web
-#   displayName: 'Deploy with Pulumi'
-#   condition: and(succeeded(), in(variables['Build.SourceBranchName'], 'master', 'develop'))
+- script: |
+    pulumi up --stack $(env) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
+  displayName: 'Deploy with Pulumi'
