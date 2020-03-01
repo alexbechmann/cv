@@ -22,6 +22,7 @@ import {
   DiVisualstudio,
   DiDocker
 } from "react-icons/di";
+import { GiShipWheel } from "react-icons/gi";
 import TypescriptIcon from "../src/components/icons/Typescript";
 import GraphQL from "../src/components/icons/GraphQL";
 import Experience from "../src/components/Experience";
@@ -106,6 +107,24 @@ const Index = () => {
               </ListItem>
               <ListItem>
                 <ListItemIcon>
+                  <DiDocker size={32} />
+                </ListItemIcon>
+                <ListItemText primary="Docker" />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <GiShipWheel size={32} />
+                </ListItemIcon>
+                <ListItemText primary="Kubernetes" />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <DiVisualstudio size={32} />
+                </ListItemIcon>
+                <ListItemText primary=".NET Core" />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
                   <DiGit size={32} />
                 </ListItemIcon>
                 <ListItemText primary="Git workflows" />
@@ -121,18 +140,6 @@ const Index = () => {
                   <DiMsqlServer size={32} />
                 </ListItemIcon>
                 <ListItemText primary="SQL" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <DiDocker size={32} />
-                </ListItemIcon>
-                <ListItemText primary="Docker" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <DiVisualstudio size={32} />
-                </ListItemIcon>
-                <ListItemText primary=".NET Core" />
               </ListItem>
             </List>
           </Grid>
