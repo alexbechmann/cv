@@ -2,7 +2,11 @@ trigger:
   - master
   
 pool:
-  vmImage: 'ubuntu-latest'
+  # vmImage: 'ubuntu-latest'
+  demands: 
+    - HOME_NETWORK
+    #  - agent.os -equals Darwin  # check for specific string in capability
+
 
 variables: 
   group: Secrets
