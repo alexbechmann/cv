@@ -10,9 +10,9 @@ pool:
 
 
 variables: 
-- group: Secrets
-- name: stack
-  value: $(Build.SourceBranchName)
+  - group: Secrets
+  - name: stack
+    value: $(Build.SourceBranchName)
 
 steps:
 - script: docker login --username alexbechmann --password $(DOCKER_TOKEN)
