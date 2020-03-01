@@ -3,6 +3,7 @@ trigger:
   
 pool:
   # vmImage: 'ubuntu-latest'
+  name: Default
   demands: 
     - HOME_NETWORK
     #  - agent.os -equals Darwin  # check for specific string in capability
