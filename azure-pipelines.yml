@@ -38,6 +38,6 @@ steps:
 - script: pulumi preview --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi
   displayName: 'Preview Pulumi'
 
-# - script: |
-#     pulumi up --stack $(env) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
-#   displayName: 'Deploy with Pulumi'
+- script: |
+    pulumi up --stack $(env) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
+  displayName: 'Deploy with Pulumi'
