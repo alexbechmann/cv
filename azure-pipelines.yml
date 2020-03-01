@@ -1,9 +1,11 @@
 trigger:
   - master
-  - develop
   
 pool:
   vmImage: 'ubuntu-latest'
+
+pr: 
+  - master
 
 steps:
 - script: | 
