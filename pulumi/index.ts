@@ -118,10 +118,13 @@ if (env === "master") {
   hostPrefixes.push("cv");
 }
 
+export const hosts: string[] = [];
+
 hostPrefixes.forEach(hostPrefix => {
   const issuer: "staging" | "prod" = "prod";
   const secretName = `tls-${hostPrefix}-secret-${issuer}`;
   const host = `${hostPrefix}.alexbechmann.dev`;
+  hosts.push(host);
   var dns = new digitalocean.DnsRecord(host, {
     ttl: 300,
     name: hostPrefix,
