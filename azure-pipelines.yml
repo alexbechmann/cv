@@ -20,8 +20,13 @@ steps:
 - script: docker login --username alexbechmann --password $(DOCKER_TOKEN)
   displayName: Docker login
 
-- script: pulumi stack init staging
-  continueOnError: true
+
+- script: echo "$(Build.SourceBranch)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-
+
+
+# - script: pulumi stack init staging
+#   workingDirectory: pulumi
+#   continueOnError: true
 
 - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
   displayName: 'Pulumi web npm install'
