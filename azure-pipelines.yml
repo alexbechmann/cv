@@ -23,7 +23,7 @@ steps:
 - script: pulumi stack init staging
   continueOnError: true
 
-- script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi/web install
+- script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
   displayName: 'Pulumi web npm install'
   
 # - script: /home/vsts/.pulumi/bin/pulumi preview --stack develop --cwd $(System.DefaultWorkingDirectory)/pulumi/web
