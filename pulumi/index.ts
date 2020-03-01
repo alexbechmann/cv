@@ -12,7 +12,7 @@ const kubeconfig = sharedStack.getOutput("kubeconfig");
 const provider = new k8s.Provider("shared-cluster", {
   kubeconfig
 });
-const env = pulumi.getStack().split("-")[0];
+const env = pulumi.getStack(); //.split("-")[0];
 const project = "cv";
 const publicIp = "100.64.81.158";
 
