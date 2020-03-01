@@ -11,7 +11,7 @@ pool:
 
 variables: 
   - group: Secrets
-  - name: stack
+  - name: env
     value: $(Build.SourceBranchName)
 
 steps:
@@ -19,17 +19,17 @@ steps:
   displayName: Docker login
 
 - script: |
-    STACK=$(echo "$(system.pullRequest.sourceBranch)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-)
-    echo "stack is $STACK"
-    echo "##vso[task.setvariable variable=stack]$STACK"
+    SLUG=$(echo "$(system.pullRequest.sourceBranch)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-)
+    echo "env is $SLUG"
+    echo "##vso[task.setvariable variable=env]$SLUG"
 
-- script: pulumi stack init $(stack)
+- script: pulumi stack init $(env)
   workingDirectory: pulumi
 
 - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
   displayName: 'Pulumi web npm install'
   
-- script: pulumi preview --stack $(stack) --cwd $(System.DefaultWorkingDirectory)/pulumi
+- script: pulumi preview --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi
   displayName: 'Preview Pulumi'
 
 # - script: |
