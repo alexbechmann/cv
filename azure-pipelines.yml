@@ -25,9 +25,8 @@ steps:
   condition: in(variables['Build.SourceBranchName'], 'master', 'develop', 'release')
 
 
-# - script: pulumi stack init staging
-#   workingDirectory: pulumi
-#   continueOnError: true
+- script: pulumi stack init $SLUG 
+  workingDirectory: pulumi
 
 - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
   displayName: 'Pulumi web npm install'
