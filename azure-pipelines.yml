@@ -29,6 +29,7 @@ steps:
 
 - script: pulumi config set digitalocean:token $(DIGITAL_OCEAN_TOKEN) --secret
   displayName: Set DO token
+  workingDirectory: pulumi
   continueOnError: true
 
 - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
