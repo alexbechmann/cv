@@ -25,6 +25,7 @@ steps:
 
 - script: pulumi stack init $(env)
   workingDirectory: pulumi
+  continueOnError: true
 
 - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
   displayName: 'Pulumi web npm install'
