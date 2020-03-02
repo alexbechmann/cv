@@ -8,6 +8,7 @@ const sharedStack = new pulumi.StackReference(
   "alexbechmann/pulumi-home-k8s-shared/master"
 );
 const kubeconfig = sharedStack.getOutput("kubeconfig");
+const publicIp = sharedStack.getOutput("publicIp");
 // const nginxIngressIp = sharedStack.getOutput('nginxIngressIp');
 const provider = new k8s.Provider("shared-cluster", {
   kubeconfig
@@ -17,7 +18,6 @@ const env = pulumi.getStack();
 // .filter((_, i) => i !== 0)
 // .join("-");
 const project = "cv";
-const publicIp = "100.64.81.158";
 
 const dockerImage = new docker.Image("image", {
   build: "../app/",
