@@ -121,7 +121,7 @@ if (env === "master") {
 export const hosts: string[] = [];
 
 hostPrefixes.forEach(hostPrefix => {
-  const issuer: "staging" | "prod" = env === "master" ? "prod" : "staging";
+  const issuer: "staging" | "prod" = "prod"; // env === "master" ? "prod" : "staging";
   const secretName = `tls-${hostPrefix}-secret-${issuer}`;
   const host = `${hostPrefix}.alexbechmann.dev`;
   hosts.push(host);
