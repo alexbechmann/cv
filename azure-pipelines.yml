@@ -54,6 +54,7 @@ stages:
     displayName: Cleanup
     jobs:
       - deployment: Cleanup
+        displayName: Cleanup preview 
         environment: prcleanup
         condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
         strategy:
