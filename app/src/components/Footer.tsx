@@ -1,17 +1,14 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/styles';
-import { Theme, AppBar, Toolbar, IconButton, Tooltip } from '@material-ui/core';
-import EmailIcon from '@material-ui/icons/Email';
-import CodeIcon from '@material-ui/icons/Code';
+import React from "react";
+import { makeStyles } from "@material-ui/styles";
+import { Theme, AppBar, Toolbar, IconButton, Tooltip } from "@material-ui/core";
+import EmailIcon from "@material-ui/icons/Email";
+import CodeIcon from "@material-ui/icons/Code";
 
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
-    top: 'auto',
+    top: "auto",
     bottom: 0,
-    backgroundColor: '#dedede'
-  },
-  '@global body': {
-    paddingBottom: 86
+    backgroundColor: "#dedede"
   },
   grow: {
     flexGrow: 1
@@ -21,7 +18,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Footer = () => {
   const classes = useStyles({});
   return (
-    <AppBar color="inherit" className={classes.appBar} position="fixed" elevation={0}>
+    <AppBar
+      color="inherit"
+      className={classes.appBar}
+      position="relative"
+      elevation={0}
+    >
       <Toolbar>
         <div className={classes.grow} />
         <Tooltip title="Send me an email">

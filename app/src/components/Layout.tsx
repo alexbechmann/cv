@@ -5,7 +5,7 @@ import Header from "./Header";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    paddingTop: theme.spacing(2),
+    paddingTop: theme.spacing(11),
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
