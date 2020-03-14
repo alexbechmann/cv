@@ -40,7 +40,7 @@ const Index = () => {
     <Layout>
       <CssBaseline />
       <Container maxWidth="md">
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           <Grid item xs={12} sm={8}>
             <Typography variant="h5" gutterBottom>
               About
@@ -72,7 +72,7 @@ const Index = () => {
             <Typography variant="h5" gutterBottom>
               Technical skills include
             </Typography>
-            <List dense>
+            <List dense disablePadding>
               <ListItem>
                 <ListItemIcon>
                   <TypescriptIcon

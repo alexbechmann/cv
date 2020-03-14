@@ -1,15 +1,20 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import GitHub from './icons/GitHub';
-import { Theme, IconButton, Avatar, Tooltip } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import GitHub from "./icons/GitHub";
+import { Theme, IconButton, Avatar, Tooltip, NoSsr } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import ProfilePicture from "./ProfilePicture";
+import Typist from "react-typist";
+import { useScrollDirection } from "./use-scroll-position";
+import { motion } from "framer-motion";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1
+  container: {
+    // flexGrow: 1
+    // marginBottom: theme.spacing(3)
   },
   menuButton: {
     marginRight: theme.spacing(2)
@@ -17,32 +22,61 @@ const useStyles = makeStyles((theme: Theme) => ({
   grow: {
     flexGrow: 1
   },
-  avatar: {
-    marginRight: theme.spacing(),
-    border: `3px solid ${theme.palette.primary.dark}`
+  motion: {
+    position: "fixed",
+    zIndex: theme.zIndex.appBar,
+    right: 0,
+    left: 0,
+    background: "red"
   }
 }));
 
 const Header = () => {
   const classes = useStyles({});
+  const scrollDirection = useScrollDirection();
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Container maxWidth="md">
-          <Toolbar disableGutters>
-            <Avatar className={classes.avatar} src="/me.jpg" />
-            <Typography variant="h6" color="inherit">
-              Alex Bechmann CV
-            </Typography>
-            <div className={classes.grow} />
-            <Tooltip title="Browse some of my projects on GitHub">
-              <IconButton color="inherit" href="https://github.com/alexbechmann">
-                <GitHub />
-              </IconButton>
-            </Tooltip>
-          </Toolbar>
-        </Container>
-      </AppBar>
+    <div
+    // className={classes.root}
+    // style={{ position: scrollDirection === "up" ? "sticky" : "relative" }}
+    // style={{ background: "transparent" }}
+    // elevation={0}
+    >
+      <motion.div
+        className={classes.motion}
+        // style={{
+        //   position: "sticky",
+        //   right: 0,
+        //   left: 0
+        // }}
+        animate={{ y: scrollDirection === "down" ? -100 : 0 }}
+      >
+        <AppBar position="relative">
+          <Container maxWidth="md" className={classes.container}>
+            <Toolbar disableGutters>
+              <ProfilePicture />
+              <Typography variant="h6" color="inherit">
+                <Typist
+                  startDelay={2000}
+                  avgTypingDelay={100}
+                  stdTypingDelay={50}
+                  cursor={{ hideWhenDone: true, hideWhenDoneDelay: 2000 }}
+                >
+                  Alex Bechmann CV.
+                </Typist>
+              </Typography>
+              <div className={classes.grow} />
+              <Tooltip title="Browse some of my projects on GitHub">
+                <IconButton
+                  color="inherit"
+                  href="https://github.com/alexbechmann"
+                >
+                  <GitHub />
+                </IconButton>
+              </Tooltip>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </motion.div>
     </div>
   );
 };

@@ -13,34 +13,66 @@ variables:
   - name: env
     value: $(Build.SourceBranchName)
 
-steps:
-- script: docker login --username alexbechmann --password $(DOCKER_TOKEN)
-  displayName: Docker login
+stages:
+  - stage: 
+    displayName: Build & Preview
+    jobs:
+      - job: Build
+        steps:
+          - script: docker login --username alexbechmann --password $(DOCKER_TOKEN)
+            displayName: Docker login
 
-- script: |
-    SLUG=$(echo "$(system.pullRequest.sourceBranch)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-)
-    echo "env is $SLUG"
-    echo "##vso[task.setvariable variable=env]$SLUG"
-  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+          - script: |
+              SLUG=$(echo "$(system.pullRequest.sourceBranch)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-)
+              echo "env is $SLUG"
+              echo "##vso[task.setvariable variable=env]$SLUG"
+            condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-- script: echo "$(system.pullRequest.sourceBranch)"
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+          - script: echo "$(system.pullRequest.sourceBranch)"
+            condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-- script: pulumi stack init $(env)
-  workingDirectory: pulumi
-  continueOnError: true
+          - script: pulumi stack init $(env)
+            workingDirectory: pulumi
+            continueOnError: true
 
-- script: pulumi config set digitalocean:token $(DIGITAL_OCEAN_TOKEN) --secret
-  displayName: Set DO token
-  workingDirectory: pulumi
-  continueOnError: true
+          - script: pulumi config set digitalocean:token $(DIGITAL_OCEAN_TOKEN) --secret
+            displayName: Set DO token
+            workingDirectory: pulumi
+            continueOnError: true
 
-- script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
-  displayName: 'Pulumi web npm install'
-  
-- script: pulumi preview --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi
-  displayName: 'Preview Pulumi'
+          - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
+            displayName: 'Pulumi web npm install'
+            
+          - script: pulumi preview --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi
+            displayName: 'Preview Pulumi'
 
-- script: |
-    pulumi up --stack $(env) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
-  displayName: 'Deploy with Pulumi'
+          - script: |
+              pulumi up --stack $(env) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
+            displayName: 'Deploy with Pulumi'
+
+  - stage:
+    displayName: Cleanup
+    jobs:
+      - deployment: Cleanup
+        displayName: Cleanup preview 
+        environment: prcleanup
+        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: |
+                    SLUG=$(echo "$(system.pullRequest.sourceBranch)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-)
+                    echo "env is $SLUG"
+                    echo "##vso[task.setvariable variable=env]$SLUG"
+                  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+
+                - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
+                  displayName: 'Pulumi web npm install'
+                  
+                - script: |
+                    pulumi destroy --stack $(env) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
+                  displayName: 'Deploy with Pulumi'
+
+
+
