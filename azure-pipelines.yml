@@ -50,17 +50,24 @@ stages:
               pulumi up --stack $(env) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
             displayName: 'Deploy with Pulumi'
 
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: $(System.DefaultWorkingDirectory)/pulumi
+              ArtifactName: Pulumi
+
   - stage:
     displayName: Cleanup
     jobs:
-      - deployment: Cleanup
-        displayName: Cleanup preview 
+      - deployment: Preview 
+        displayName: Preview 
         environment: prcleanup
         condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
         strategy:
           runOnce:
             deploy:
               steps:
+                - download: Pulumi
+
                 - script: |
                     SLUG=$(echo "$(system.pullRequest.sourceBranch)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-)
                     echo "env is $SLUG"
@@ -71,8 +78,8 @@ stages:
                   displayName: 'Pulumi web npm install'
                   
                 - script: |
-                    pulumi destroy --stack $(env) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
-                  displayName: 'Deploy with Pulumi'
+                    pulumi destroy --stack $(env) --yes --cwd $(Pipeline.Workspace)/Pulumi
+                  displayName: 'Destroy with Pulumi'
 
 
 
