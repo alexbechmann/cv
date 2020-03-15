@@ -26,8 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: "fixed",
     zIndex: theme.zIndex.appBar,
     right: 0,
-    left: 0,
-    background: "red"
+    left: 0
   }
 }));
 
@@ -48,7 +47,10 @@ const Header = () => {
         //   right: 0,
         //   left: 0
         // }}
-        animate={{ y: scrollDirection === "down" ? -100 : 0 }}
+        animate={{ y: scrollDirection === "down" ? -64 : 0 }}
+        transition={{
+          type: "tween"
+        }}
       >
         <AppBar position="relative">
           <Container maxWidth="md" className={classes.container}>
