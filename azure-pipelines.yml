@@ -19,6 +19,11 @@ stages:
     jobs:
       - job: Build
         steps:
+          - task: PublishBuildArtifacts@1
+            inputs:
+              PathtoPublish: $(System.DefaultWorkingDirectory)/pulumi
+              ArtifactName: Pulumi
+
           - script: docker login --username alexbechmann --password $(DOCKER_TOKEN)
             displayName: Docker login
 
@@ -50,11 +55,6 @@ stages:
               pulumi up --stack $(env) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
             displayName: 'Deploy with Pulumi'
 
-          - task: PublishBuildArtifacts@1
-            inputs:
-              PathtoPublish: $(System.DefaultWorkingDirectory)/pulumi
-              ArtifactName: Pulumi
-
   - stage:
     displayName: Cleanup
     jobs:
@@ -74,10 +74,11 @@ stages:
                     echo "##vso[task.setvariable variable=env]$SLUG"
                   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-                - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
+                - script: npm --prefix $(Pipeline.Workspace)/Pulumi install
                   displayName: 'Pulumi web npm install'
                   
                 - script: |
+                    npm install 
                     pulumi destroy --stack $(env) --yes --cwd $(Pipeline.Workspace)/Pulumi
                   displayName: 'Destroy with Pulumi'
 
