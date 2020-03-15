@@ -6,8 +6,8 @@ import Header from "./Header";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(10),
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    paddingLeft: 0,
+    paddingRight: 0,
     [theme.breakpoints.up("sm")]: {
       paddingLeft: theme.spacing(3),
       paddingRight: theme.spacing(3)

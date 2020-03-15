@@ -44,7 +44,7 @@ const Header = () => {
               <ProfilePicture />
               <Typography variant="h6" color="inherit">
                 <Typist
-                  startDelay={2000}
+                  startDelay={2500}
                   avgTypingDelay={100}
                   stdTypingDelay={50}
                   cursor={{ hideWhenDone: true, hideWhenDoneDelay: 2000 }}

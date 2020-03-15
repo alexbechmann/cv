@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Layout from "../src/components/Layout";
@@ -13,19 +13,10 @@ import {
   CssBaseline,
   Link
 } from "@material-ui/core";
-import {
-  DiReact,
-  DiGit,
-  DiNodejsSmall,
-  DiMongodb,
-  DiMsqlServer,
-  DiVisualstudio,
-  DiDocker
-} from "react-icons/di";
-import { GiShipWheel } from "react-icons/gi";
-import TypescriptIcon from "../src/components/icons/Typescript";
 import GraphQL from "../src/components/icons/GraphQL";
 import Experience from "../src/components/Experience";
+import { skills } from "../src/info/skills";
+import { motion } from "framer-motion";
 
 const useStyles = makeStyles((theme: Theme) => ({
   divider: {
@@ -73,74 +64,24 @@ const Index = () => {
               Technical skills include
             </Typography>
             <List dense disablePadding>
-              <ListItem>
-                <ListItemIcon>
-                  <TypescriptIcon
-                    style={{
-                      marginLeft: 4
+              {skills.map(({ name, iconElement, color }, index) => {
+                return (
+                  <motion.div
+                    style={{ x: -20 }}
+                    animate={{ x: 0 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      delay: index * 0.1
                     }}
-                  />
-                </ListItemIcon>
-                <ListItemText primary="TypeScript" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <DiReact size={32} />
-                </ListItemIcon>
-                <ListItemText primary="React" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <DiNodejsSmall size={32} />
-                </ListItemIcon>
-                <ListItemText primary="NodeJS" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <GraphQL
-                    style={{
-                      marginLeft: 4
-                    }}
-                  />
-                </ListItemIcon>
-                <ListItemText primary="GraphQL" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <DiDocker size={32} />
-                </ListItemIcon>
-                <ListItemText primary="Docker" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <GiShipWheel size={32} />
-                </ListItemIcon>
-                <ListItemText primary="Kubernetes" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <DiVisualstudio size={32} />
-                </ListItemIcon>
-                <ListItemText primary=".NET Core" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <DiGit size={32} />
-                </ListItemIcon>
-                <ListItemText primary="Git workflows" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <DiMongodb size={32} />
-                </ListItemIcon>
-                <ListItemText primary="NoSQL" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <DiMsqlServer size={32} />
-                </ListItemIcon>
-                <ListItemText primary="SQL" />
-              </ListItem>
+                  >
+                    <ListItem key={name}>
+                      <ListItemIcon>{iconElement({ color })}</ListItemIcon>
+                      <ListItemText style={{ color }} primary={name} />
+                    </ListItem>
+                  </motion.div>
+                );
+              })}
             </List>
           </Grid>
         </Grid>
