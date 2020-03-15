@@ -19,6 +19,8 @@ stages:
     jobs:
       - job: Build
         steps:
+         
+
           - script: docker login --username alexbechmann --password $(DOCKER_TOKEN)
             displayName: Docker login
 
@@ -35,10 +37,25 @@ stages:
             workingDirectory: pulumi
             continueOnError: true
 
-          - script: pulumi config set digitalocean:token $(DIGITAL_OCEAN_TOKEN) --secret
+          - script: pulumi config set digitalocean:token $(DIGITAL_OCEAN_TOKEN) --secret --stack $(env)
             displayName: Set DO token
             workingDirectory: pulumi
             continueOnError: true
+
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: $(System.DefaultWorkingDirectory)/pulumi
+              Contents: |
+                package*.json
+                index.ts
+                Pulumi*
+                tsconfig.json
+              TargetFolder: $(Build.ArtifactStagingDirectory)/Pulumi
+
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: $(Build.ArtifactStagingDirectory)/Pulumi
+              ArtifactName: Pulumi
 
           - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
             displayName: 'Pulumi web npm install'
@@ -53,26 +70,31 @@ stages:
   - stage:
     displayName: Cleanup
     jobs:
-      - deployment: Cleanup
-        displayName: Cleanup preview 
+      - deployment: Preview 
+        displayName: Preview 
         environment: prcleanup
         condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
         strategy:
           runOnce:
             deploy:
               steps:
+                - task: DownloadPipelineArtifact@2
+                  inputs:
+                    artifactName: Pulumi
+
                 - script: |
                     SLUG=$(echo "$(system.pullRequest.sourceBranch)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-)
                     echo "env is $SLUG"
                     echo "##vso[task.setvariable variable=env]$SLUG"
                   condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-                - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
+                - script: npm --prefix $(Pipeline.Workspace)/Pulumi install
                   displayName: 'Pulumi web npm install'
                   
                 - script: |
-                    pulumi destroy --stack $(env) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
-                  displayName: 'Deploy with Pulumi'
+                    npm install 
+                    pulumi destroy --stack $(env) --yes --cwd $(Pipeline.Workspace)/Pulumi
+                  displayName: 'Destroy with Pulumi'
 
 
 
