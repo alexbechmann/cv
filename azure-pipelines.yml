@@ -29,9 +29,9 @@ stages:
                 tsconfig.json
               TargetFolder: $(Build.ArtifactStagingDirectory)/Pulumi
 
-          - task: PublishBuildArtifacts@1
+          - task: PublishPipelineArtifact@1
             inputs:
-              PathtoPublish: $(Build.ArtifactStagingDirectory)/Pulumi
+              targetPath: $(Build.ArtifactStagingDirectory)/Pulumi
               ArtifactName: Pulumi
 
           - script: docker login --username alexbechmann --password $(DOCKER_TOKEN)
@@ -76,7 +76,9 @@ stages:
           runOnce:
             deploy:
               steps:
-                - download: Pulumi
+                - task: DownloadPipelineArtifact@2
+                  inputs:
+                    artifactName: Pulumi
 
                 - script: |
                     SLUG=$(echo "$(system.pullRequest.sourceBranch)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-)
