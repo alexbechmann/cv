@@ -19,9 +19,19 @@ stages:
     jobs:
       - job: Build
         steps:
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: $(System.DefaultWorkingDirectory)/pulumi
+              Contents: |
+                package*.json
+                index.ts
+                Pulumi*
+                tsconfig.json
+              TargetFolder: $(Build.ArtifactStagingDirectory)/Pulumi
+
           - task: PublishBuildArtifacts@1
             inputs:
-              PathtoPublish: $(System.DefaultWorkingDirectory)/pulumi
+              PathtoPublish: $(Build.ArtifactStagingDirectory)/Pulumi
               ArtifactName: Pulumi
 
           - script: docker login --username alexbechmann --password $(DOCKER_TOKEN)
