@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Theme, makeStyles, Grid, Container, Slide } from "@material-ui/core";
 import JobCard, { JobCardProps } from "./JobCard";
 import ExperienceDivider from "./ExperienceDivider";
@@ -21,16 +21,21 @@ const Experience = () => {
           .map((job, index) => {
             const ref = useRef();
             const onScreen = useOnScreen(ref, "00px");
+            const [hasMouseOver, setHasMouseOver] = useState(false);
+            const scale = hasMouseOver ? 1.05 : onScreen ? 1 : 0.5;
+
             return (
               <motion.div
                 ref={ref}
-                animate={{ scale: onScreen ? 1 : 0.5 }}
+                animate={{ scale }}
                 key={job.companyName}
                 transition={{
                   type: "spring",
                   stiffness: 150,
                   damping: 20
                 }}
+                onMouseEnter={() => setHasMouseOver(true)}
+                onMouseLeave={() => setHasMouseOver(false)}
               >
                 <Grid xs={12} item>
                   <JobCard {...job} />

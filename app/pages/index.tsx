@@ -65,15 +65,34 @@ const Index = () => {
             </Typography>
             <List dense disablePadding>
               {skills.map(({ name, iconElement, color }, index) => {
+                const [
+                  initialAnimationEnded,
+                  setInitialAnimationEnded
+                ] = useState(false);
+                const [hasMouseOver, setHasMouseOver] = useState(false);
+                const delay = initialAnimationEnded ? 0 : index * 0.1;
+                console.log({ initialAnimationEnded });
                 return (
                   <motion.div
-                    style={{ x: -20 }}
-                    animate={{ x: 0 }}
+                    style={{ x: -50, opacity: 0 }}
+                    animate={{
+                      x: 0,
+                      opacity: 1,
+
+                      rotate: hasMouseOver ? 4 : 0
+                    }}
                     transition={{
                       type: "spring",
-                      stiffness: 400,
-                      delay: index * 0.1
+                      // stiffness: 200,
+                      // damping: 100,
+                      delay
                     }}
+                    // onAnimationComplete={() => }
+                    onMouseEnter={() => {
+                      setHasMouseOver(true);
+                      setInitialAnimationEnded(true);
+                    }}
+                    onMouseLeave={() => setHasMouseOver(false)}
                   >
                     <ListItem disableGutters key={name}>
                       <ListItemIcon>{iconElement({ color })}</ListItemIcon>
