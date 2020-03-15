@@ -75,7 +75,7 @@ const Index = () => {
                       delay: index * 0.1
                     }}
                   >
-                    <ListItem key={name}>
+                    <ListItem disableGutters key={name}>
                       <ListItemIcon>{iconElement({ color })}</ListItemIcon>
                       <ListItemText style={{ color }} primary={name} />
                     </ListItem>
