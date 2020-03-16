@@ -57,6 +57,11 @@ export const skills: {
     color: "rgb(89, 44, 140)"
   },
   {
+    name: "Azure DevOps",
+    iconElement: ({ color }) => <DiVisualstudio style={{ color }} size={32} />,
+    color: "#005ba1"
+  },
+  {
     name: "Git workflows",
     iconElement: ({ color }) => <DiGit style={{ color }} size={32} />,
     color: "rgb(233, 78, 49)"
@@ -71,4 +76,9 @@ export const skills: {
     iconElement: ({ color }) => <DiMsqlServer style={{ color }} size={32} />,
     color: "rgb(234, 21, 19)"
   }
+  // {
+  //   name: "Command line",
+  //   iconElement: ({ color }) => <DiTerminal style={{ color }} size={32} />,
+  //   color: "#333"
+  // }
 ];
