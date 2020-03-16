@@ -21,7 +21,7 @@ const Experience = () => {
           .map((job, index) => {
             const ref = useRef();
             const onScreen = useOnScreen(ref, "00px");
-            const scale = onScreen ? 1 : 0.5;
+            const scale = onScreen ? 1 : 0.8;
 
             return (
               <motion.div

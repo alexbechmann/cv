@@ -71,7 +71,6 @@ const Index = () => {
                 ] = useState(false);
                 const [hasMouseOver, setHasMouseOver] = useState(false);
                 const delay = initialAnimationEnded ? 0 : index * 0.1;
-                console.log({ initialAnimationEnded });
                 return (
                   <motion.div
                     style={{ x: -50, opacity: 0 }}
