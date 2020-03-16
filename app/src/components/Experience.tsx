@@ -21,8 +21,7 @@ const Experience = () => {
           .map((job, index) => {
             const ref = useRef();
             const onScreen = useOnScreen(ref, "00px");
-            const [hasMouseOver, setHasMouseOver] = useState(false);
-            const scale = hasMouseOver ? 1.05 : onScreen ? 1 : 0.5;
+            const scale = onScreen ? 1 : 0.5;
 
             return (
               <motion.div
@@ -34,8 +33,6 @@ const Experience = () => {
                   stiffness: 150,
                   damping: 20
                 }}
-                onMouseEnter={() => setHasMouseOver(true)}
-                onMouseLeave={() => setHasMouseOver(false)}
               >
                 <Grid xs={12} item>
                   <JobCard {...job} />

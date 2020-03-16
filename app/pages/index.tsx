@@ -83,11 +83,8 @@ const Index = () => {
                     }}
                     transition={{
                       type: "spring",
-                      // stiffness: 200,
-                      // damping: 100,
                       delay
                     }}
-                    // onAnimationComplete={() => }
                     onMouseEnter={() => {
                       setHasMouseOver(true);
                       setInitialAnimationEnded(true);
