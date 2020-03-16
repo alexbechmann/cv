@@ -77,7 +77,6 @@ const Index = () => {
                     animate={{
                       x: 0,
                       opacity: 1,
-
                       rotate: hasMouseOver ? 4 : 0
                     }}
                     transition={{
