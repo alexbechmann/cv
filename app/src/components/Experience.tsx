@@ -19,25 +19,24 @@ const Experience = () => {
       <Grid container className={classes.root}>
         {jobs
           .map((job, index) => {
-            const ref = useRef();
-            const onScreen = useOnScreen(ref, "00px");
-            const scale = onScreen ? 1 : 0.8;
-
+            // const ref = useRef();
+            // const onScreen = useOnScreen(ref, "00px");
+            // const scale = onScreen ? 1 : 0.8;
             return (
-              <motion.div
-                ref={ref}
-                animate={{ scale }}
-                key={job.companyName}
-                transition={{
-                  type: "spring",
-                  stiffness: 150,
-                  damping: 20
-                }}
-              >
-                <Grid xs={12} item>
-                  <JobCard {...job} />
-                </Grid>
-              </motion.div>
+              // <motion.div
+              //   ref={ref}
+              //   animate={{ scale }}
+              //   key={job.companyName}
+              //   transition={{
+              //     type: "spring",
+              //     stiffness: 150,
+              //     damping: 20
+              //   }}
+              // >
+              <Grid xs={12} item>
+                <JobCard {...job} />
+              </Grid>
+              // </motion.div>
             );
           })
           .reduce(
