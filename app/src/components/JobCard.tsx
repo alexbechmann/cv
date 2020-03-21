@@ -1,30 +1,41 @@
-import React from 'react';
-import { Theme, makeStyles, Card, CardHeader, CardContent, Avatar, Chip } from '@material-ui/core';
-import CardActions from '@material-ui/core/CardActions';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import LanguageIcon from '@material-ui/icons/Language';
+import React from "react";
+import {
+  Theme,
+  makeStyles,
+  Card,
+  CardHeader,
+  CardContent,
+  Avatar,
+  Chip
+} from "@material-ui/core";
+import CardActions from "@material-ui/core/CardActions";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import LanguageIcon from "@material-ui/icons/Language";
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {},
+  cardContent: {
+    paddingBottom: 0
+  },
   media: {
     height: 0,
-    paddingTop: '56.25%' // 16:9
+    paddingTop: "56.25%" // 16:9
   },
   expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     })
   },
   expandOpen: {
-    transform: 'rotate(180deg)'
+    transform: "rotate(180deg)"
   },
   chip: {
     marginRight: theme.spacing(),
     marginBottom: theme.spacing(),
-    height: '20px'
+    height: "20px"
   }
 }));
 
@@ -54,16 +65,23 @@ const JobCard: React.ComponentType<JobCardProps> = ({
   return (
     <Card className={classes.card} elevation={12}>
       <CardHeader
-        avatar={<Avatar style={{ backgroundColor: color }}>{companyName[0]}</Avatar>}
+        avatar={
+          <Avatar style={{ backgroundColor: color }}>{companyName[0]}</Avatar>
+        }
         title={`${role} at ${companyName} (${location})`}
         subheader={timespan}
       />
-      <CardContent>
-        <Typography paragraph variant="body2" color="textSecondary" component="p">
+      <CardContent className={classes.cardContent}>
+        <Typography
+          paragraph
+          variant="body2"
+          color="textSecondary"
+          component="p"
+        >
           {description}
         </Typography>
         {tags.map(tag => (
-          <Chip className={classes.chip} label={tag} />
+          <Chip key={tag} className={classes.chip} label={tag} />
         ))}
       </CardContent>
       <CardActions disableSpacing>

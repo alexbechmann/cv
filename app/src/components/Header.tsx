@@ -8,14 +8,10 @@ import { Theme, IconButton, Avatar, Tooltip, NoSsr } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import ProfilePicture from "./ProfilePicture";
 import Typist from "react-typist";
-import { useScrollDirection } from "./use-scroll-position";
+import { useScrollDirection } from "../hooks/use-scroll-position";
 import { motion } from "framer-motion";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    // flexGrow: 1
-    // marginBottom: theme.spacing(3)
-  },
   menuButton: {
     marginRight: theme.spacing(2)
   },
@@ -26,8 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: "fixed",
     zIndex: theme.zIndex.appBar,
     right: 0,
-    left: 0,
-    background: "red"
+    left: 0
   }
 }));
 
@@ -35,28 +30,21 @@ const Header = () => {
   const classes = useStyles({});
   const scrollDirection = useScrollDirection();
   return (
-    <div
-    // className={classes.root}
-    // style={{ position: scrollDirection === "up" ? "sticky" : "relative" }}
-    // style={{ background: "transparent" }}
-    // elevation={0}
-    >
+    <div>
       <motion.div
         className={classes.motion}
-        // style={{
-        //   position: "sticky",
-        //   right: 0,
-        //   left: 0
-        // }}
-        animate={{ y: scrollDirection === "down" ? -100 : 0 }}
+        animate={{ y: scrollDirection === "down" ? -64 : 0 }}
+        transition={{
+          type: "tween"
+        }}
       >
         <AppBar position="relative">
-          <Container maxWidth="md" className={classes.container}>
+          <Container maxWidth="md">
             <Toolbar disableGutters>
               <ProfilePicture />
               <Typography variant="h6" color="inherit">
                 <Typist
-                  startDelay={2000}
+                  startDelay={2500}
                   avgTypingDelay={100}
                   stdTypingDelay={50}
                   cursor={{ hideWhenDone: true, hideWhenDoneDelay: 2000 }}
