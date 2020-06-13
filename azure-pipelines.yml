@@ -31,11 +31,11 @@ stages:
           - script: echo "$(system.pullRequest.sourceBranch)"
             condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
 
-          - script: pulumi stack init $(env)
+          - script: pulumi stack select $(env) --create
             workingDirectory: pulumi
-            continueOnError: true
+            continueOnError: false
 
-          - script: pulumi config set digitalocean:token $(DIGITAL_OCEAN_TOKEN) --secret --stack $(env)
+          - script: pulumi config set digitalocean:token $(DIGITAL_OCEAN_TOKEN) --secret
             displayName: Set DO token
             workingDirectory: pulumi
             continueOnError: true
@@ -57,6 +57,9 @@ stages:
 
           - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
             displayName: "Pulumi web npm install"
+
+          - script: pulumi refresh --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi
+            displayName: "Refresh Pulumi"
 
           - script: pulumi preview --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi
             displayName: "Preview Pulumi"
