@@ -61,7 +61,7 @@ stages:
           - script: pulumi refresh --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi
             displayName: "Refresh Pulumi"
 
-          - script: pulumi preview --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi
+          - script: pulumi preview --stack $(env) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
             displayName: "Preview Pulumi"
 
           - script: |
