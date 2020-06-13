@@ -58,10 +58,10 @@ stages:
           - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
             displayName: "Pulumi web npm install"
 
-          - script: pulumi refresh --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi
+          - script: pulumi refresh --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi  --yes
             displayName: "Refresh Pulumi"
 
-          - script: pulumi preview --stack $(env) --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
+          - script: pulumi preview --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi
             displayName: "Preview Pulumi"
 
           - script: |
