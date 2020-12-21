@@ -42,7 +42,7 @@ jobs:
             --cache-to=type=registry,ref=${image}:$(cache_tag),mode=max \
             --push \
             --progress=plain \
-            ./apps/dotnet-web
+            ./apps/frontend
         displayName: "Build cv-frontend"
 
   - job: Deploy
