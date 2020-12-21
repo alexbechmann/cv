@@ -59,4 +59,4 @@ jobs:
 
       - script: ls
 
-      - script: helm upgrade sample-app --install --namespace cv-master --create-namespace ./iac/helm-charts/cv --set tag=$(tag)
+      - script: helm upgrade cv-master --install --namespace cv-master --create-namespace ./iac/helm-charts/cv --set tag=$(tag)
