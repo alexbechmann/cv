@@ -18,7 +18,24 @@ spec:
                 name: frontend
                 port:
                   number: 3000
+    {{ if eq .Values.env "master" }}
+    - host: cv.alexbechmann.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 3000
+    {{ end }}
   tls:
     - hosts:
         - cv-{{ .Values.env }}.alexbechmann.dev
       secretName: cv-{{ .Values.env }}.alexbechmann.dev
+    {{ if eq .Values.env "master" }}
+    - hosts:
+        - cv.alexbechmann.dev
+      secretName: cv.alexbechmann.dev
+    {{ end }}
