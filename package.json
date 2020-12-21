@@ -1,0 +1,26 @@
+{
+  "name": "cv",
+  "version": "1.0.0",
+  "description": "https://cv.alexbechmann.dev/",
+  "private": true,
+  "workspaces": [
+    "apps/**"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "lerna run dev --stream"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexbechmann/cv.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexbechmann/cv/issues"
+  },
+  "homepage": "https://github.com/alexbechmann/cv#readme",
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}

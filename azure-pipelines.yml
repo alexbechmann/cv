@@ -1,98 +1,62 @@
 trigger:
   - master
 
-pool:
-  # vmImage: 'ubuntu-latest'
-  name: Default
-  demands:
-    - CLUSTER
-    #  - agent.os -equals Darwin  # check for specific string in capability
-
 variables:
-  - group: Secrets
-  - name: env
-    value: $(Build.SourceBranchName)
+  - group: docker
+  - name: DOCKER_BUILDKIT
+    value: 1
+  - name: DOCKER_CLI_EXPERIMENTAL
+    value: enabled
+  - name: tag
+    value: "0.1.$(Build.BuildId)"
+  - name: cache_tag
+    value: cache-master
 
-stages:
-  - stage:
-    displayName: Build & Preview
-    jobs:
-      - job: Build
-        steps:
-          - script: docker login --username alexbechmann --password $(DOCKER_TOKEN)
-            displayName: Docker login
+jobs:
+  - job: Build
+    pool:
+      vmImage: ubuntu-20.04
+    steps:
+      - script: |
+          helm template ./iac/helm-charts/cv
+        displayName: Template helm chart
 
-          - script: |
-              SLUG=$(echo "$(system.pullRequest.sourceBranch)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-)
-              echo "env is $SLUG"
-              echo "##vso[task.setvariable variable=env]$SLUG"
-            condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+      - script: sudo service docker restart
 
-          - script: echo "$(system.pullRequest.sourceBranch)"
-            condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+      - script: docker login -u alexbechmann -p "$(dockerPassword)"
 
-          - script: pulumi stack select $(env) --create
-            workingDirectory: pulumi
-            continueOnError: false
+      - script: |
+          docker version
+          docker buildx ls
+          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+          docker buildx create --name builder --driver docker-container --use
+          docker buildx inspect --bootstrap
+          docker buildx ls
 
-          - script: pulumi config set digitalocean:token $(DIGITAL_OCEAN_TOKEN) --secret
-            displayName: Set DO token
-            workingDirectory: pulumi
-            continueOnError: true
+      - script: |
+          image=alexbechmann/cv-frontend
+          docker buildx build \
+            -t "${image}:$(tag)" \
+            --platform linux/arm64 \
+            --cache-from=type=registry,ref=${image}:$(cache_tag) \
+            --cache-to=type=registry,ref=${image}:$(cache_tag),mode=max \
+            --push \
+            --progress=plain \
+            ./apps/frontend
+        displayName: "Build cv-frontend"
 
-          - task: CopyFiles@2
-            inputs:
-              SourceFolder: $(System.DefaultWorkingDirectory)/pulumi
-              Contents: |
-                package*.json
-                index.ts
-                Pulumi*
-                tsconfig.json
-              TargetFolder: $(Build.ArtifactStagingDirectory)/Pulumi
+  - job: Deploy
+    dependsOn:
+      - Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    pool:
+      name: Default
+      demands:
+        - ARM_CLUSTER
+    steps:
+      - script: kubectl get pods --all-namespaces
+        displayName: "Run a one-line script"
 
-          - task: PublishPipelineArtifact@1
-            inputs:
-              targetPath: $(Build.ArtifactStagingDirectory)/Pulumi
-              ArtifactName: Pulumi
+      - script: ls
 
-          - script: npm --prefix $(System.DefaultWorkingDirectory)/pulumi install
-            displayName: "Pulumi web npm install"
-
-#           - script: pulumi refresh --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi  --yes
-#             displayName: "Refresh Pulumi"
-
-#           - script: pulumi preview --stack $(env) --cwd $(System.DefaultWorkingDirectory)/pulumi
-#             displayName: "Preview Pulumi"
-
-          - script: |
-              pulumi up --stack $(env) --refresh --yes --cwd $(System.DefaultWorkingDirectory)/pulumi
-            displayName: "Deploy with Pulumi"
-
-  - stage:
-    displayName: Cleanup
-    jobs:
-      - deployment: Preview
-        displayName: Preview
-        environment: prcleanup
-        condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - task: DownloadPipelineArtifact@2
-                  inputs:
-                    artifactName: Pulumi
-
-                - script: |
-                    SLUG=$(echo "$(system.pullRequest.sourceBranch)" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-)
-                    echo "env is $SLUG"
-                    echo "##vso[task.setvariable variable=env]$SLUG"
-                  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
-
-                - script: npm --prefix $(Pipeline.Workspace)/Pulumi install
-                  displayName: "Pulumi web npm install"
-
-                - script: |
-                    npm install 
-                    pulumi destroy --stack $(env) --yes --cwd $(Pipeline.Workspace)/Pulumi
-                  displayName: "Destroy with Pulumi"
+      - script: helm upgrade sample-app --install --namespace cv-master --create-namespace ./iac/helm-charts/cv --set tag=$(tag)

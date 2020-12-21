@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Layout from "../src/components/Layout";
+import Layout from "../components/Layout";
 import {
   Container,
   Grid,
@@ -11,18 +11,18 @@ import {
   ListItemIcon,
   Divider,
   CssBaseline,
-  Link
+  Link,
 } from "@material-ui/core";
-import GraphQL from "../src/components/icons/GraphQL";
-import Experience from "../src/components/Experience";
-import { skills } from "../src/info/skills";
+import GraphQL from "../components/icons/GraphQL";
+import Experience from "../components/Experience";
+import { skills } from "../info/skills";
 import { motion } from "framer-motion";
 
 const useStyles = makeStyles((theme: Theme) => ({
   divider: {
     marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3)
-  }
+    marginBottom: theme.spacing(3),
+  },
 }));
 
 const Index = () => {
@@ -67,7 +67,7 @@ const Index = () => {
               {skills.map(({ name, iconElement, color }, index) => {
                 const [
                   initialAnimationEnded,
-                  setInitialAnimationEnded
+                  setInitialAnimationEnded,
                 ] = useState(false);
                 const [hasMouseOver, setHasMouseOver] = useState(false);
                 const delay = initialAnimationEnded ? 0 : index * 0.1;
@@ -77,11 +77,11 @@ const Index = () => {
                     animate={{
                       x: 0,
                       opacity: 1,
-                      rotate: hasMouseOver ? 4 : 0
+                      rotate: hasMouseOver ? 4 : 0,
                     }}
                     transition={{
                       type: "spring",
-                      delay
+                      delay,
                     }}
                     onMouseEnter={() => {
                       setHasMouseOver(true);
